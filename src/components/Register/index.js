@@ -10,7 +10,7 @@ import {LOGIN} from '../../constants/routeNames';
 
 //const logo = 'https://toppng.com/uploads/preview/youtube-logo-11609383902z56yosfap9.png';
 
-const RegisterComponent = ({ form, errors, onChange, onSubmit }) => {
+const RegisterComponent = ({ onSubmit,onChange, form, loading, error, errors }) => {
 
     const {navigate} = useNavigation();
 
@@ -21,12 +21,13 @@ const RegisterComponent = ({ form, errors, onChange, onSubmit }) => {
                 <Text style={styles.title}>Welcome to VContact</Text>
                 <Text style={styles.subTitle}>Create a free account!</Text>
                 <View style={styles.form}>
+                    {error?.error && <Text>{error?.error}</Text>}
                     <Input
                         label="Username"
                         iconPosition="right"
                         placeholder="Enter Username"
-                        onChangeText={(value) => { onChange({name: 'userName', value}); }}
-                        error={errors.userName}
+                        onChangeText={(value) => { onChange({name: 'username', value}); }}
+                        error={errors.username || error?.username?.[0]}
                     />
                     <Input
                         label="First Name"
@@ -47,7 +48,7 @@ const RegisterComponent = ({ form, errors, onChange, onSubmit }) => {
                         iconPosition="right"
                         placeholder="Enter Email"
                         onChangeText={(value) => { onChange({name: 'email', value}); }}
-                        error={errors.email}
+                        error={errors.email || error?.email[0]}
                     />
                     <Input
                         label="Password"
@@ -58,7 +59,13 @@ const RegisterComponent = ({ form, errors, onChange, onSubmit }) => {
                         onChangeText={(value) => { onChange({name: 'password', value}); }}
                         error={errors.password}
                     />
-                    <CustomButton onPress={onSubmit} primary title="Submit" />
+                    <CustomButton
+                        loading={loading}
+                        onPress={onSubmit}
+                        disabled={loading}
+                        primary
+                        title="Submit"
+                    />
                     <View style={styles.createSection}>
                         <Text style={styles.infoText  }>Already have an account?</Text>
                         <TouchableOpacity onPress={() =>{navigate(LOGIN);}}>

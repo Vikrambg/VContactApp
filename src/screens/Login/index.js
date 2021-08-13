@@ -4,7 +4,9 @@ import LoginComponent from '../../components/Login';
 
 
 const Login = () => {
-    const [value, onChangeText] = useState('');
+
+    const [form, setForm ] = useState({});
+
     return (
         <LoginComponent />
     );
