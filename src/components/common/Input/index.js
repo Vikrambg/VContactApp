@@ -34,7 +34,7 @@ const Input = ({ onChangeText, iconPosition, icon, style, value, label, error, .
     };
 
     return (
-        <View>
+        <View style={{marginTop:10}}>
             {label && <Text> { label} </Text>}
             <View style={[styles.wrapper, {alignItems: icon ? 'center' : 'baseline'}, { borderColor: getBorderColor(), flexDirection: getFlexDirection() }] }>
                 <View style>{icon && icon  }</View>
