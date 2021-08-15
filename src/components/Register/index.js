@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Container from '../common/Container';
@@ -7,12 +7,14 @@ import styles from './styles';
 import CustomButton from '../common/CustomButton';
 import Input from '../common/Input';
 import {LOGIN} from '../../constants/routeNames';
+import Message from '../common/Message';
 
 //const logo = 'https://toppng.com/uploads/preview/youtube-logo-11609383902z56yosfap9.png';
 
 const RegisterComponent = ({ onSubmit,onChange, form, loading, error, errors }) => {
 
     const {navigate} = useNavigation();
+    const [isSecureEntry, setIsSecureEntry] = useState(true);
 
     return (
         <Container>
@@ -21,7 +23,16 @@ const RegisterComponent = ({ onSubmit,onChange, form, loading, error, errors }) 
                 <Text style={styles.title}>Welcome to VContact</Text>
                 <Text style={styles.subTitle}>Create a free account!</Text>
                 <View style={styles.form}>
-                    {error?.error && <Text>{error?.error}</Text>}
+                    {error?.error && (
+                        <Message
+                            retry
+                            danger
+                            retryFn={()=> {
+                                console.log('chekc in ');
+                            }}
+                            message={error?.error}
+                        />
+                    )}
                     <Input
                         label="Username"
                         iconPosition="right"
@@ -34,30 +45,36 @@ const RegisterComponent = ({ onSubmit,onChange, form, loading, error, errors }) 
                         iconPosition="right"
                         placeholder="Enter First Name"
                         onChangeText={(value) => { onChange({name: 'firstName', value}); }}
-                        error={errors.firstName}
+                        error={errors.firstName || error?.first_name?.[0]}
                     />
                     <Input
                         label="Last Name"
                         iconPosition="right"
                         placeholder="Enter Last Name"
                         onChangeText={(value) => { onChange({name: 'lastName', value}); }}
-                        error={errors.lastName}
+                        error={errors.lastName || error?.last_name?.[0]}
                     />
                     <Input
                         label="Email"
                         iconPosition="right"
                         placeholder="Enter Email"
                         onChangeText={(value) => { onChange({name: 'email', value}); }}
-                        error={errors.email || error?.email[0]}
+                        error={errors.email || error?.email?.[0]}
                     />
                     <Input
                         label="Password"
                         placeholder="Enter Password"
-                        secureTextEntry={true}
-                        icon={<Text> Hide</Text>}
+                        secureTextEntry={isSecureEntry}
+                        icon={
+                            <TouchableOpacity onPress={
+                                () => {setIsSecureEntry((prev)=> !prev)}
+                            }>
+                                <Text>{isSecureEntry ? "Show" : "Hide" }</Text>
+                            </TouchableOpacity>
+                        }
                         iconPosition="right"
                         onChangeText={(value) => { onChange({name: 'password', value}); }}
-                        error={errors.password}
+                        error={errors.password || error?.password?.[0]}
                     />
                     <CustomButton
                         loading={loading}

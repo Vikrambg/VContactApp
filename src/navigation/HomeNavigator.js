@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { CONTACT_DETAIL, CONTACT_LIST, CREATE_CONTACT, SETTINGS } from '../constants/routeNames';
 import Contacts from '../screens/Contacts';
 import ContactDetail from '../screens/ContactDetail';
@@ -9,7 +10,7 @@ import Settings from '../screens/Settings';
 
 
 
-const HomeStack = createNativeStackNavigator();
+const HomeStack = createStackNavigator();
 const HomeNavigator = () => {
     return (
         <HomeStack.Navigator initialRouteName="Contacts">

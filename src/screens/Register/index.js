@@ -1,15 +1,18 @@
 /* eslint-disable prettier/prettier */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import RegisterComponent from '../../components/Register';
 //import envs from '../../config/env';
-import register from '../../context/actions/auth/register';
+import register, {clearAuthState} from '../../context/actions/auth/register';
 import axiosInstance from '../../helpers/axiosInterceptor';
 import { GlobalContext } from '../../context/provider';
+import { LOGIN } from '../../constants/routeNames';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 
 const Register = () => {
 
     const [form, setForm] = useState({ });
+    const { navigate } = useNavigation();
     const [errors, setErrors] = useState({});
     const { authDispatch, authState:{ error, loading, data } } = useContext(GlobalContext);
     //const {DEV_BACKEND_URL} = envs;
@@ -23,9 +26,21 @@ const Register = () => {
         });
     }, []);
 
+    useFocusEffect(
+        useCallback(() => {
+            //console.log('CheckeIN');
+
+            return () => {
+                //console.log('CheckOut');
+                if (data || error) {
+                    clearAuthState()(authDispatch);
+                }
+            };
+        }, [data, error]),
+    );
+
     const onChange = ({name, value}) => {
         setForm({ ...form, [name]:value});
-
         if (value !== '' ) {
             if (name === 'password') {
                 if (value.length < 6) {
@@ -52,7 +67,7 @@ const Register = () => {
     const onSubmit = () => {
         //validations
         console.log('form:',form);
-        if (!form.userName) {
+        if (!form.username) {
             setErrors(prev => {
                 return { ...prev,  username: 'Please add a username'};
             });
@@ -84,7 +99,9 @@ const Register = () => {
             Object.values(form).every(item => item.trim().length > 0) &&
             Object.values(errors).every((item) => !item)
         ) {
-            register(form)(authDispatch);
+            register(form)(authDispatch)((response) => {
+                navigate(LOGIN, {data: response});
+            });
         }
     };
 
