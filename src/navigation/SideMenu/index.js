@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { loadOptions } from '@babel/core';
-import React from 'react'
-import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react';
+import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import Container from '../../components/common/Container';
 import { SETTINGS } from '../../constants/routeNames';
 import logoutUser from '../../context/actions/auth/logoutUser';
 import styles from './styles';
+//import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../../components/common/Icon';
+
 
 const SideMenu = ({ navigation, authDispatch }) => {
 
@@ -28,12 +30,12 @@ const SideMenu = ({ navigation, authDispatch }) => {
 
     const menuItems = [
         {
-            icon:<Text>T</Text>, 
-            name: 'Settings', 
-            onPress: () => {navigation.navigate(SETTINGS)},
+            icon:<Icon type="material" name="settings" size={20} />,
+            name: 'Settings',
+            onPress: () => {navigation.navigate(SETTINGS);},
         },
         {
-            icon:<Text>L</Text>,
+            icon:<Icon type="material" name="logout" size={20} />,
             name: 'Logout',
             onPress:() => handleLogout(),
         },

@@ -26,6 +26,12 @@ const Register = () => {
         });
     }, []);
 
+    useEffect(()=> {
+        if (data) {
+            navigate(LOGIN);
+        }
+    },[data]);
+
     useFocusEffect(
         useCallback(() => {
             //console.log('CheckeIN');
@@ -99,9 +105,7 @@ const Register = () => {
             Object.values(form).every(item => item.trim().length > 0) &&
             Object.values(errors).every((item) => !item)
         ) {
-            register(form)(authDispatch)((response) => {
-                navigate(LOGIN, {data: response});
-            });
+            register(form)(authDispatch);
         }
     };
 

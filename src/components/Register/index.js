@@ -67,7 +67,7 @@ const RegisterComponent = ({ onSubmit,onChange, form, loading, error, errors }) 
                         secureTextEntry={isSecureEntry}
                         icon={
                             <TouchableOpacity onPress={
-                                () => {setIsSecureEntry((prev)=> !prev)}
+                                () => {setIsSecureEntry((prev)=> !prev);}
                             }>
                                 <Text>{isSecureEntry ? "Show" : "Hide" }</Text>
                             </TouchableOpacity>

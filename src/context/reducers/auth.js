@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { CLEAR_AUTH_STATE, LOGIN_FAIL, LOGIN_LOADING, LOGIN_SUCCESS, LOGOUT_USER, REGISTER_FAIL, REGISTER_LOADING, REGISTER_SUCCESS } from '../../constants/actionTypes';
 
-
 const auth = (state, { type, payload }) => {
      switch (type) {
          case LOGIN_LOADING:

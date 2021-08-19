@@ -31,7 +31,7 @@ export default ({
             type: REGISTER_SUCCESS,
             payload: res.data,
         });
-        onSuccess(res.data);
+        onSuccess();
     }).catch((err) => {
         dispatch({
             type:REGISTER_FAIL,

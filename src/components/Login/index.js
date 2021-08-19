@@ -47,7 +47,7 @@ const LoginComponent = ({ onSubmit, onChange, error, form, login, loading  }) =>
                         secureTextEntry={isSecureEntry}
                         icon={
                             <TouchableOpacity onPress={
-                                () => {setIsSecureEntry((prev)=> !prev)}
+                                () => {setIsSecureEntry((prev)=> !prev);}
                             }>
                                 <Text>{isSecureEntry ? "Show" : "Hide" }</Text>
                             </TouchableOpacity>

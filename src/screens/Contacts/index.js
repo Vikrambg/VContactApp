@@ -1,11 +1,15 @@
 /* eslint-disable prettier/prettier */
-import { DrawerToggleButton } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import Container from '../../components/common/Container';
+import React, { useEffect, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
+//import Container from '../../components/common/Container';
+//import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Icon from '../../components/common/Icon';
+import ContactComponent from '../../components/Contacts';
 
 const Contacts = ({navigation}) => {
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     const { setOptions } = useNavigation();
 
@@ -13,16 +17,17 @@ const Contacts = ({navigation}) => {
         setOptions({
             headerLeft: () => (
                 <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-                    <Text style={{ padding:10 }}>Nav</Text>
+                   <Icon type="evilIcon" name="navicon" size={30} style={{ marginTop:5, marginLeft:15}} />
                 </TouchableOpacity>
             ),
         });
     },[]);
 
     return (
-        <Container>
-            <Text> Hello form Contacts</Text>
-        </Container>
+        <ContactComponent
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+        />
     );
 };
 

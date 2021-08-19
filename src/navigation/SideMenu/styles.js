@@ -12,7 +12,7 @@ export default StyleSheet.create({
     item:{
         flexDirection:'row',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
     },
     itemText:{
         fontSize:17,
