@@ -20,6 +20,7 @@ const AppModal = ({ title, modalBody, modalFooter, modalVisible, setModalVisible
                 <View />
                 <View />
               </View>
+              <View style={styles.footerSeparator} />
               <View style={styles.body}>{modalBody}</View>
               {modalFooter ? (
                 modalFooter

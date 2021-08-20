@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 export default {
     getContacts:{
-       data:{},
+       data:[],
        error:null,
        loading:false,
     },
