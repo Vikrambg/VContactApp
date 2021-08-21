@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native';
 import Icon from '../../components/common/Icon';
 import ContactComponent from '../../components/Contacts';
 import getContacts from '../../context/actions/contacts/getContacts';
-import {GlobalContext} from '../../context/provider'
+import {GlobalContext} from '../../context/provider';
 
 const Contacts = ({navigation}) => {
 

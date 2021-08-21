@@ -17,7 +17,7 @@ export default () => (dispatch) => {
     }).catch((err) => {
         dispatch({
             type: GET_CONTACTS_FAIL,
-            payload: err.respone ? err.response.data : { error: "Something went wrong, try again!"}
+            payload: err.respone ? err.response.data : { error: "Something went wrong, try again!"},
         });
     });
 };

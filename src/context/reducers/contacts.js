@@ -1,8 +1,43 @@
 /* eslint-disable prettier/prettier */
-import { GET_CONTACTS_FAIL, GET_CONTACTS_LOADING, GET_CONTACTS_SUCCESS } from '../../constants/actionTypes';
+import { CREATE_CONTACT_FAIL, CREATE_CONTACT_LOADING, CREATE_CONTACT_SUCCESS, GET_CONTACTS_FAIL, GET_CONTACTS_LOADING, GET_CONTACTS_SUCCESS } from '../../constants/actionTypes';
 
 const contacts = (state, { type, payload }) =>{
     switch (type) {
+
+        case CREATE_CONTACT_LOADING:
+            return {
+                ...state,
+                createContact:{
+                     ...state.createContact,
+                     loading:true,
+                     error:null,
+                },
+            };
+        case CREATE_CONTACT_SUCCESS:
+            return {
+                ...state,
+                createContact:{
+                     ...state.createContact,
+                     loading:false,
+                     error:null,
+                     data:payload,
+                },
+                getContacts: {
+                    ...state.getContacts,
+                     loading:false,
+                     error:null,
+                     data:[payload, ...state.getContacts.data],
+                },
+            };
+        case CREATE_CONTACT_FAIL:
+                return {
+                    ...state,
+                    createContact:{
+                         ...state.createContact,
+                         loading:false,
+                         error:payload,
+                    },
+                };
         case GET_CONTACTS_LOADING:
             return {
                 ...state,
@@ -18,22 +53,7 @@ const contacts = (state, { type, payload }) =>{
                 getContacts:{
                      ...state.getContacts,
                      loading:false,
-                     data:[{
-                          id:1,
-                        first_name:'Vikram',
-                        last_name:'Kumar',
-                        phone_number:'9958167703',
-                    },{
-                        id:2,
-                        first_name:'Vikram',
-                        last_name:'Kumar',
-                        phone_number:'9958167703',
-                    },{id:3,
-                        first_name:'Vikram',
-                        last_name:'Kumar',
-                        phone_number:'9958167703',
-                    },],
-                    /* data:payload */
+                     data:payload,
                      error:null,
                 },
              };
