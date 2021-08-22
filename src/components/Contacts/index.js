@@ -11,7 +11,7 @@ import {CREATE_CONTACT} from '../../constants/routeNames';
 
 const ContactComponent = ({ modalVisible,data, loading, setModalVisible }) => {
 
-    console.log(data);
+    //console.log(data);
 
     const { navigate } = useNavigation();
 
@@ -24,7 +24,7 @@ const ContactComponent = ({ modalVisible,data, loading, setModalVisible }) => {
     };
 
      const renderItem = ({item}) => {
-         console.log('item', item);
+         //console.log('item', item);
          const { 
              contact_picture, 
              first_name, 
